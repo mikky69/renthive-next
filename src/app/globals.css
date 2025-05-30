@@ -1,0 +1,300 @@
+/* Tailwind directives */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Animated Background */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  background: linear-gradient(135deg, #050a1a 0%, #0a0f29 100%);
+}
+
+:root {
+  --foreground-rgb: 17, 24, 39; /* gray-900 */
+  --background-rgb: 249, 250, 251; /* gray-50 */
+  --primary-rgb: 21, 85, 72; /* RentHive green */
+  --primary-hover-rgb: 16, 64, 54; /* Darker green */
+  --secondary-rgb: 255, 193, 7; /* RentHive gold */
+  --accent-rgb: 13, 110, 253; /* Bootstrap blue */
+  
+  /* Custom colors */
+  --rent-hive-green: #155548;
+  --rent-hive-gold: #ffc107;
+  --rent-hive-blue: #0d6efd;
+  --rent-hive-yellow: #ffc107;
+  --rent-hive-light: #f8f9fa;
+  --rent-hive-dark: #212529;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 243, 244, 246; /* gray-100 */
+    --background-rgb: 17, 24, 39; /* gray-900 */
+  }
+}
+
+/* Base styles */
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #111827; /* gray-900 */
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.25rem; line-height: 2.5rem; }
+h2 { font-size: 1.875rem; line-height: 2.25rem; }
+h3 { font-size: 1.5rem; line-height: 2rem; }
+
+/* Links */
+a {
+  color: #4f46e5; /* indigo-600 */
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #4338ca; /* indigo-700 */
+}
+
+/* Buttons */
+button, .btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #4f46e5; /* indigo-600 */
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #4338ca; /* indigo-700 */
+}
+
+.btn-outline {
+  border: 1px solid #4f46e5; /* indigo-600 */
+  color: #4f46e5; /* indigo-600 */
+  background-color: transparent;
+}
+
+.btn-outline:hover {
+  background-color: #eef2ff; /* indigo-50 */
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delay-1 {
+  animation: float 6s ease-in-out 1s infinite;
+}
+
+.animate-float-delay-2 {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rent-hive-green);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover-rgb);
+}
+
+/* Custom utilities */
+.bg-rent-hive-gradient {
+  background: linear-gradient(135deg, var(--rent-hive-green) 0%, var(--rent-hive-blue) 100%);
+}
+
+.text-rent-hive-yellow {
+  color: var(--rent-hive-yellow);
+}
+
+.bg-rent-hive-yellow {
+  background-color: var(--rent-hive-yellow);
+}
+
+.border-rent-hive-yellow {
+  border-color: var(--rent-hive-yellow);
+}
+
+.hover\:bg-rent-hive-yellow:hover {
+  background-color: var(--rent-hive-yellow);
+}
+
+.hover\:text-rent-hive-yellow:hover {
+  color: var(--rent-hive-yellow);
+}
+
+/* Navbar styles */
+.navbar {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(21, 85, 72, 0.9);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(16, 64, 54, 0.98);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Text balance */
+.text-balance {
+  /* Fallback for all browsers */
+  max-width: 100%;
+  /* Standard hyphens with vendor prefixes for better compatibility */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  /* Ensure text wraps properly */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Modern browsers that support text-wrap: balance */
+@supports (text-wrap: balance) {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Print-specific styles */
+@media print {
+  /* Use @supports to only apply these properties in supporting browsers */
+  @supports (orphans: 3) {
+    .text-balance {
+      orphans: 3;
+    }
+  }
+  
+  @supports (widows: 3) {
+    .text-balance {
+      widows: 3;
+    }
+  }
+  
+  /* Fallback for Firefox */
+  .text-balance {
+    /* Use break-inside as a more widely supported alternative */
+    break-inside: avoid;
+  }
+  
+  /* Ensure proper page breaks around sections */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  
+  /* Prevent page breaks inside important content */
+  .no-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+/* Dark mode */
+.dark {
+  color-scheme: dark;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #f9fafb; /* gray-50 */
+}
+
+.dark a {
+  color: #818cf8; /* indigo-400 */
+}
+
+.dark a:hover {
+  color: #a5b4fc; /* indigo-300 */
+}
+
+.dark .btn-outline {
+  border-color: #818cf8; /* indigo-400 */
+  color: #818cf8; /* indigo-400 */
+}
+
+.dark .btn-outline:hover {
+  background-color: #1f2937; /* gray-800 */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f9fafb; /* gray-100 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; /* gray-300 */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a5b4fc; /* gray-400 */
+}
