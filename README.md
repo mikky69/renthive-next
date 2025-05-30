@@ -69,7 +69,18 @@
 
 ## 📸 Screenshots
 
-*Add some screenshots of your application here*
+Here are some screenshots of the RentHive platform:
+
+<div align="center">
+  <img src="/public/screenshots/homepage.png" alt="Homepage" width="30%" />
+  <img src="/public/screenshots/property-details.png" alt="Property Details" width="30%" />
+  <img src="/public/screenshots/dashboard.png" alt="User Dashboard" width="30%" />
+</div>
+
+To add your own screenshots:
+1. Take screenshots of your application
+2. Save them in the `public/screenshots/` directory
+3. Update the file names in the markdown above to match your screenshot files
 
 ## 🤝 Contributing
 
