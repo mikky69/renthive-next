@@ -1,10 +1,11 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode, FC } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 
-interface AuthContextType {
+// Define the shape of our auth context
+export interface AuthContextType {
   user: any;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
@@ -13,19 +14,21 @@ interface AuthContextType {
   error: string | null;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+// Create the context with a default undefined value
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const supabase = createClientComponentClient();
   const router = useRouter();
 
+  // Handle auth state changes
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
@@ -34,11 +37,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     );
 
+    // Cleanup subscription on unmount
     return () => {
       subscription.unsubscribe();
     };
   }, [supabase.auth]);
 
+  // Sign in function
   const signIn = async (email: string, password: string) => {
     try {
       setLoading(true);
@@ -56,6 +61,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  // Sign up function
   const signUp = async (email: string, password: string) => {
     try {
       setLoading(true);
@@ -76,6 +82,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  // Sign out function
   const signOut = async () => {
     try {
       setLoading(true);
@@ -90,7 +97,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const value = {
+  // The value that will be provided by the context
+  const value: AuthContextType = {
     user,
     signIn,
     signUp,
@@ -101,12 +109,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {!loading ? children : null}
     </AuthContext.Provider>
   );
-}
+};
 
-export const useAuth = () => {
+// Custom hook to use the auth context
+export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
