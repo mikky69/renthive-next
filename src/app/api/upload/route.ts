@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getCurrentUser } from '@/lib/supabase/server';
-import { uploadMultipleFiles } from '@/lib/supabase/storage';
+import { uploadMultipleFiles, deleteFile } from '@/lib/supabase/storage'; // Added deleteFile import
 
 export async function POST(request: Request) {
   try {
@@ -63,7 +63,11 @@ export async function DELETE(request: Request) {
     }
 
     // Delete file from Supabase Storage
-    await deleteFile(path);
+    const result = await deleteFile(path);
+    
+    if (result === false) {
+      throw new Error('Failed to delete file');
+    }
 
     return NextResponse.json({
       success: true,
